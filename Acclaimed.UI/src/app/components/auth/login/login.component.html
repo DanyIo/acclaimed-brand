@@ -1,0 +1,16 @@
+<div class="login-container">
+    <h2>Login</h2>
+    <div class="form-group">
+        <label for="username">Name:</label>
+        <input id="username" placeholder="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input id="password" placeholder="Password" type="password" class="form-control" />
+    </div>
+    <button (click)="login(user)" class="btn btn-primary">Login</button>
+    <button class="btn btn-danger">Sign in with Google</button>
+    <div>
+        Don't have an account? <a [routerLink]="'/register'" routerLinkActive="active">Register here</a>
+    </div>
+</div>

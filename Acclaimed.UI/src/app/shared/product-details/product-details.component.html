@@ -1,0 +1,31 @@
+<div class="main-container">
+    <div class="image-container">
+        <img src="{{currentProduct.images[0]}}" alt="{{currentProduct.name}}">
+    </div>
+    <div class="interaction-container">
+        <span class="product-name">{{currentProduct.name}}</span>
+        <p class="product-description">{{currentProduct.description}}</p>
+
+        <ng-container [ngSwitch]="currentProduct.categoryID">
+            <ng-container *ngSwitchCase="1">
+                <p>Length: {{currentProduct.length}} meters</p>
+                <p>Weight: {{currentProduct.weight}} kg</p>
+                <p>Test Range: {{currentProduct.minTest}}g - {{currentProduct.maxTest}}g</p>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="2">
+                <div class="weights-section">
+                    <button *ngFor="let weight of currentProduct.weights">{{weight}} g</button>
+                </div>
+
+                <p>Quantity: {{currentProduct.quantity}}</p>
+            </ng-container>
+
+            <ng-container *ngSwitchDefault>
+                <p>No additional information available for this category.</p>
+            </ng-container>
+        </ng-container>
+
+        <button class="add-to-bucket">Add to Bucket</button>
+    </div>
+</div>

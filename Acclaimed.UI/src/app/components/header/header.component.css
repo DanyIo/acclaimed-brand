@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  gap: 5px;
+  padding: 6px 0 6px 0;
+  width: 100%;
+}
+.first-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  width: 35%;
+}

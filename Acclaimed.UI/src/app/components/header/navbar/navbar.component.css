@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    gap: 30px;
+    font-size: 14px;
+    a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        &:hover {
+            color: gray;
+        }
+    }
+}

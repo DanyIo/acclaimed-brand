@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="filter-section">
+        <div class="dropdown">
+            <button mat-button (click)="toggleDropdown()">
+                <span>Choose category</span>
+                <mat-icon iconPositionEnd="end">keyboard_arrow_down</mat-icon>
+            </button>
+            <div class="dropdown-content" [ngClass]="{ 'show': dropdownOpen, 'not-show': !dropdownOpen }">
+                <li *ngFor="let category of categories$ | async">
+                    <mat-checkbox color="primary" (change)="toggleCategory(category.categoryID)"
+                        [checked]="isSelected(category.categoryID)">
+                        {{category.name}}
+                    </mat-checkbox>
+                </li>
+            </div>
+
+        </div>
+        <div class="price-range">
+
+        </div>
+    </div>
+    <div class="products-section">
+        <div class="products-wrapper" *ngIf="(filteredProducts$ | async) as filteredProducts">
+            <div *ngFor="let product of filteredProducts" class="product-card"
+                [routerLink]="'/product-details/' + product.productID">
+                <img [src]="product.images[0]" alt="product.name" class="product-image">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-price">{{ product.price }} $</p>
+                <button class="product-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>

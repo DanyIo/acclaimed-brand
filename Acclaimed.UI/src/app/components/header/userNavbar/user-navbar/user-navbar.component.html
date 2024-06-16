@@ -1,0 +1,4 @@
+<ul class="navbar">
+    <a *ngFor="let navbarItem of navigationMenu" [routerLink]="navbarItem.routerLink" routerLinkActive="active"
+        ariaCurrentWhenActive="page">{{ navbarItem.name }}</a>
+</ul>

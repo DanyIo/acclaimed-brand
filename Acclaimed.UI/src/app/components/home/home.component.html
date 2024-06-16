@@ -1,0 +1,21 @@
+<div class="homepage-container">
+    <div class="banner-wrapper">
+        <img src="../../../assets/banner/output.jpg" alt="banner" class="banner-image">
+        <div class="rounded-bg">
+            <p class="black-text">Ready for a big catch?</p>
+            <button class="black-button" [routerLink]="'/search/:all'" routerLinkActive="active">SHOP NOW</button>
+        </div>
+    </div>
+    <div class="products-section">
+        <p class="huge-text" [routerLink]="'/search/:all'" routerLinkActive="active">New products to check</p>
+        <div class="products-wrapper">
+            <div *ngFor="let product of products.slice(0,8)" class="product-card"
+                [routerLink]="'/product-details/' + product.productID">
+                <img [src]="product.images[0]" alt="product.name" class="product-image">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-price">{{ product.price }} $</p>
+                <button class="product-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>

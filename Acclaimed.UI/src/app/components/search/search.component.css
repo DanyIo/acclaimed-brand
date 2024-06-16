@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3%;
+}
+.products-section {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  gap: 25px;
+  font-weight: bold;
+}
+.products-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: calc(19% - 20px); /* 20px is the total horizontal padding */
+  background-color: white;
+  border-radius: 10px;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  text-align: center; /* Center text within each card */
+  border: 1px solid black; /* Add black border */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  animation: fadeIn 3s ease forwards; /* Apply animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start with opacity 0 */
+  }
+  to {
+    opacity: 1; /* Fade in to full opacity */
+  }
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.product-name {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.product-description {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Media Query for Phones */
+@media screen and (max-width: 767px) {
+  .product-card {
+    width: calc(50% - 20px); /* 20px is the total horizontal padding */
+  }
+}
+.filter-section {
+  display: flex;
+  width: 91%;
+  justify-content: space-between;
+}
+
+.dropdown-content {
+  position: absolute;
+  display: flex; /* Ensure flex layout */
+  flex-direction: column; /* Arrange child elements in a column */
+  gap: 20px; /* Add gap between child elements */
+  z-index: 1; /* Ensure it's above other elements */
+  background-color: white; /* Set the background color to white */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  padding: 10px 40px 10px 10px; /* Add some padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.show {
+  display: block;
+}
+
+.not-show {
+  display: none;
+}
+li {
+  list-style-type: none;
+}

@@ -1,0 +1,11 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure it takes the full height of the viewport */
+}
+
+/* Main content should grow to take the available space */
+.main-content {
+  flex: 1;
+  padding-bottom: 20px; /* Prevent content overlap with the footer */
+}

@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (AcclaimedAPI)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildAcclaimedAPI",
+            "program": "${workspaceFolder}/Acclaimed.Backend/src/Acclaimed.API/bin/Debug/net8.0/Acclaimed.API.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Acclaimed.Backend/src/Acclaimed.API",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "AcclaimedAPI",
+            "configurations": [".NET Core Launch (AcclaimedAPI)"],
+            "stopAll": true
+        }
+    ]
+}

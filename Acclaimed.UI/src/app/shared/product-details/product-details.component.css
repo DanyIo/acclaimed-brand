@@ -1,0 +1,93 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.image-container img {
+  width: 75%; /* Ensure images fill the container */
+  height: auto;
+}
+
+.product-name {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+.interaction-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 50px;
+}
+/* Product description styling */
+.product-description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Category-specific details styling */
+.interaction-container p {
+  font-size: 1rem;
+  color: #444;
+  margin: 10px 0;
+}
+
+/* Add to bucket button styling */
+.add-to-bucket {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.add-to-bucket:hover {
+  background-color: #191919;
+}
+.weights-section {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .interaction-container {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-name {
+    font-size: 1.5rem;
+  }
+
+  .product-description {
+    font-size: 1rem;
+  }
+
+  .add-to-bucket {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    align-self: center;
+  }
+}
