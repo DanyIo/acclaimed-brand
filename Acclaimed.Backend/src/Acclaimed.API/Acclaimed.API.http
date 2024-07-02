@@ -1,6 +1,0 @@
-@Acclaimed.API_HostAddress = http://localhost:5239
-
-GET {{Acclaimed.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

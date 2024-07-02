@@ -1,5 +1,0 @@
-{
-    "cSpell.words": ["hmac", "HMACSHA"],
-    "appService.defaultWebAppToDeploy": "/subscriptions/062d3d62-9640-486e-9e75-4289936f98d2/resourceGroups/acclaimed-brand_group/providers/Microsoft.Web/sites/acclaimed-brand",
-    "appService.deploySubpath": "."
-}
