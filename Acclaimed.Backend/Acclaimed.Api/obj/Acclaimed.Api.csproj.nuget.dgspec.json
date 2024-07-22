@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.Api/Acclaimed.Api.csproj": {}
+    "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.API/Acclaimed.API.csproj": {}
   },
   "projects": {
-    "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.Api/Acclaimed.Api.csproj": {
+    "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.API/Acclaimed.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.Api/Acclaimed.Api.csproj",
-        "projectName": "Acclaimed.Api",
-        "projectPath": "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.Api/Acclaimed.Api.csproj",
+        "projectUniqueName": "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.API/Acclaimed.API.csproj",
+        "projectName": "Acclaimed.API",
+        "projectPath": "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.API/Acclaimed.API.csproj",
         "packagesPath": "/Users/danylobodnar/.nuget/packages/",
-        "outputPath": "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.Api/obj/",
+        "outputPath": "/Users/danylobodnar/Desktop/Acclaimed brand/Acclaimed.Backend/Acclaimed.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/danylobodnar/.nuget/NuGet/NuGet.Config"
@@ -160,6 +160,10 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.5, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

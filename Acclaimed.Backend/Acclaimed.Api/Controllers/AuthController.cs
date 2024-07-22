@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Acclaimed.Application.Services;
 using Acclaimed.Domain.Entities;
+using Acclaimed.Application.Exceptions;
+using Microsoft.AspNetCore.Http;
 
-namespace Acclaimed.Web.Controllers
+namespace Acclaimed.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,27 +26,51 @@ namespace Acclaimed.Web.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<IActionResult> Register(UserDto request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _authService.RegisterAsync(request);
-            return Ok(user);
+            var existingUser = await _authService.GetUserByUsernameAsync(request.Username);
+            if (existingUser != null)
+            {
+                return Conflict(new { message = "Username already taken. Please, login." });
+            }
+
+            var result = await _authService.RegisterAsync(request);
+
+            SetRefreshTokenCookie(result.refreshToken);
+
+
+            return Ok(new { token = result.token });
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<IActionResult> Login([FromBody] UserDto request)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
-            }
+                var result = await _authService.LoginAsync(request);
 
-            var result = await _authService.LoginAsync(request);
-            return Ok(result);
+                SetRefreshTokenCookie(result.refreshToken);
+
+
+                return Ok(new { token = result.token });
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Internal server error: ", ex });
+            }
         }
 
         [HttpPost("refresh-token")]
@@ -57,12 +83,33 @@ namespace Acclaimed.Web.Controllers
             }
 
             var result = await _authService.RefreshTokenAsync(refreshToken);
-            return Ok(result);
+
+            SetRefreshTokenCookie(result.refreshToken);
+
+
+            return Ok(new { token = result.token });
         }
+
         [HttpGet("test")]
         public ActionResult<string> Test()
         {
             return Ok("Deployment works!");
         }
+
+        private void SetRefreshTokenCookie(string refreshToken)
+        {
+            var options = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.Now.AddDays(7),
+                Path = "/"
+            };
+            Response.Cookies.Append("refreshToken", refreshToken, options);
+        }
+
+
+
     }
 }

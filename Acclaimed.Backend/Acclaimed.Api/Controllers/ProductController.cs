@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Acclaimed.Application.Services;
 using Acclaimed.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Acclaimed.Web.Controllers
@@ -15,7 +16,6 @@ namespace Acclaimed.Web.Controllers
         {
             _productService = productService;
         }
-
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAllProducts()
         {

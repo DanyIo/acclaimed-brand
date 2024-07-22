@@ -1,4 +1,4 @@
 export class User {
-  email = '';
-  password = '';
+  username = "";
+  password = "";
 }

@@ -1,10 +1,10 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { environment } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class HttpService {
   private baseUrl = environment.apiUrl;
@@ -14,14 +14,14 @@ export class HttpService {
   get<T>(
     url: string,
     params?: HttpParams,
-    headers?: HttpHeaders
+    headers?: HttpHeaders,
   ): Observable<T> {
     const options = { params, headers };
     return this.http.get<T>(`${this.baseUrl}/${url}`, options);
   }
 
   post<T>(url: string, body: any, headers?: HttpHeaders): Observable<T> {
-    const options = { headers };
+    const options = { headers, withCredentials: true };
     return this.http.post<T>(`${this.baseUrl}/${url}`, body, options);
   }
 

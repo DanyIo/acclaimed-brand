@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Acclaimed.Application.Exceptions;
 
 namespace Acclaimed.Application.Services
 {
@@ -26,7 +27,7 @@ namespace Acclaimed.Application.Services
             return await Task.FromResult("UserName");
         }
 
-        public async Task<User> RegisterAsync(UserDto request)
+        public async Task<(string token, string refreshToken)> RegisterAsync(UserDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -42,13 +43,21 @@ namespace Acclaimed.Application.Services
 
             await _userRepository.AddUserAsync(user);
 
-            return user;
+            string token = CreateToken(user);
+
+            return (token, user.RefreshToken);
         }
 
         public async Task<(string token, string refreshToken)> LoginAsync(UserDto request)
         {
             var user = await _userRepository.GetUserByUsernameAsync(request.Username);
-            if (user == null || !VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+
+            if (user == null)
+            {
+                throw new NotFoundException("User not found.");
+            }
+
+            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 throw new UnauthorizedAccessException("Invalid credentials.");
             }
@@ -60,6 +69,11 @@ namespace Acclaimed.Application.Services
             await _userRepository.UpdateUserAsync(user);
 
             return (token, refreshToken.Token);
+        }
+
+        public async Task<User?> GetUserByUsernameAsync(string username)
+        {
+            return await _userRepository.GetUserByUsernameAsync(username);
         }
 
         public async Task<(string token, string refreshToken)> RefreshTokenAsync(string refreshToken)
@@ -100,21 +114,31 @@ namespace Acclaimed.Application.Services
         private string CreateToken(User user)
         {
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, "User")
-        };
+    {
+        new Claim(ClaimTypes.Name, user.Username),
+        new Claim(ClaimTypes.Role, "User")
+    };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AppSettings:Token"]));
+            var tokenKey = _configuration["AppSettings:Token"];
+            if (string.IsNullOrEmpty(tokenKey))
+            {
+                // Log the error or handle it appropriately
+                throw new InvalidOperationException("Token secret key is not configured.");
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddMinutes(45),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
+
 
         private RefreshToken GenerateRefreshToken()
         {

@@ -22,12 +22,14 @@ public class Startup
     {
         services.AddCors(options =>
         {
-            options.AddDefaultPolicy(builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            });
+            options.AddPolicy("AllowSpecificOrigin",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowCredentials();
+                });
         });
 
         services.AddControllers();
@@ -51,7 +53,7 @@ public class Startup
         services.AddScoped<CategoryService>();
         services.AddScoped<AuthService>();
 
-
+        // Configure Swagger
         services.AddSwaggerGen(options =>
         {
             options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
@@ -61,19 +63,29 @@ public class Startup
                 Name = "Authorization",
                 Type = SecuritySchemeType.ApiKey
             });
-
         });
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+        // Configure JWT authentication
+        var tokenKey = Configuration["AppSettings:Token"];
+        if (string.IsNullOrEmpty(tokenKey))
         {
-            options.TokenValidationParameters = new TokenValidationParameters
+            throw new InvalidOperationException("Token secret key is not configured.");
+        }
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            };
-        });
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = key,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true // Automatically checks for token expiration
+                };
+            });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -89,7 +101,7 @@ public class Startup
             });
         }
 
-        app.UseCors();
+        app.UseCors("AllowSpecificOrigin");
         app.UseHttpsRedirection();
 
         app.UseRouting();
