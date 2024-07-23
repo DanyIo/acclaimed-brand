@@ -168,7 +168,12 @@ Acclaimed.Backend/Acclaimed.Api/appsettings.Production.json
 
 # Ignore bin directory
 Acclaimed.Backend/Acclaimed.Api/bin/
+Acclaimed.Backend/Acclaimed.Domain/bin/
+Acclaimed.Backend/Acclaimed.Application/bin/
+Acclaimed.Backend/Acclaimed.Infrastructure/bin/
 
 # Ignore obj directory
 Acclaimed.Backend/Acclaimed.Api/obj/
-
+Acclaimed.Backend/Acclaimed.Domain/obj/
+Acclaimed.Backend/Acclaimed.Application/obj/
+Acclaimed.Backend/Acclaimed.Infrastructure/obj/
