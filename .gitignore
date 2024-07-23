@@ -163,4 +163,12 @@ node_modules/
 jspm_packages/
 
 
+# Ignore appsettings.Production.json file
 Acclaimed.Backend/Acclaimed.Api/appsettings.Production.json
+
+# Ignore bin directory
+Acclaimed.Backend/Acclaimed.Api/bin/
+
+# Ignore obj directory
+Acclaimed.Backend/Acclaimed.Api/obj/
+
