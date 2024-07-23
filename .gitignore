@@ -1,1 +1,166 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (Mono)
+monodevelop_workspace.xml
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Uncomment if you have tasks that create the project's static files in wwwroot or client app folder
+# wwwroot/
+# ClientApp/dist/
+
+# Microsoft Visual Studio generated files
+.vs/
+.vscode/
+.vscode-test/
+
+# Microsoft Azure Web App deploy files
+.traffics/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# StyleCop
+StyleCopCache.xml
+
+# TeamCity
+_TeamCity/
+
+# DotCover
+*.dotCover
+
+# JetBrains Rider
+.idea/
+
+# Rider specific file
+.idea/*
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# DotNet Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Temporary & Backup Files
+*~
+*.temp
+*.tmp
+*.bak
+*.backup
+*.swp
+*.swo
+*.orig
+
+# Packages
+*.nupkg
+*.snupkg
+.nuget/
+
+# NuGet
+.nuget/packages/
+*.nupkg
+
+# Dotnet local
+.dotnet/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux file system
+.cache/
+.config/
+.local/
+
+# OSX file system
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Icon must end with two \r
+Icon
+
+# Icon location and file
+.Spotlight-V100
+.Trashes
+
+# git directories
+*.git/
+!.gitignore
+
+# App settings
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+secrets.json
+
+# VS Code directories
+.vscode/
+
+# Rider directories
+.idea/
+
+# Backup & logs
+*_backup/
+*.log
+
+# Test files
+TestResults/
+
+# NCrunch
+_NCrunch_/
+*.[Nn]Crunch*
+
+# Logs and database files
+*.log
+*.ldf
+*.mdf
+
+# Web and API-specific files
+*.publishsettings
+*.publishproj
+.env
+.env.*
+
+
+# Python compiled files
+__pycache__/
+
+# Node.js directories
+node_modules/
+jspm_packages/
+
+
 Acclaimed.Backend/Acclaimed.Api/appsettings.Production.json
